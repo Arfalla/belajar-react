@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
+import { useTodos } from '../App';
 
-// Fungsi untuk mendapatkan tanggal saat ini dalam format tertentu
 const getCurrentDate = () => {
   const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
   return new Date().toLocaleDateString('id-ID', options);
 };
 
-const TodoForm = ({ addTodo }) => {
+const TodoForm = () => {
   const [title, setTitle] = useState('');
+  const { addTodo } = useTodos(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title) {
-      alert("Please fill in the title");
+      alert("Harap isi todo terlebih dahulu");
       return;
     }
 
-    // Membuat todo baru dengan tanggal saat ini
     const newTodo = {
       id: Date.now(),
       title,
-      date: getCurrentDate(), // Tanggal diisi otomatis
+      date: getCurrentDate(),
       completed: false,
     };
 
-    addTodo(newTodo); // Panggil fungsi addTodo dari props
-    setTitle(''); // Reset form
+    addTodo(newTodo); // 
+    setTitle(''); 
   };
 
   return (
@@ -36,10 +36,10 @@ const TodoForm = ({ addTodo }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full p-2 rounded-md"
-          placeholder="Masukkan Todo Kamu"
+          placeholder="Tuliskan Todo Kamu"
         />
       </div>
-      <button type="submit" className="bg-green-500 text-white p-2 rounded-md">
+      <button type="submit" className="bg-green-500 text-white px-5 py-2 rounded-md">
         Tambahkan Todo
       </button>
     </form>

@@ -1,7 +1,10 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import { useTodos } from '../App'; 
 
-const Todos = ({ todos, toggleCompleted, deleteTodo }) => {
+const Todos = () => {
+  const { todos, toggleCompleted, deleteTodo } = useTodos(); 
+
   return (
     <div>
       {todos.map((todo) => (
@@ -14,6 +17,6 @@ const Todos = ({ todos, toggleCompleted, deleteTodo }) => {
       ))}
     </div>
   );
-}
+};
 
 export default Todos;

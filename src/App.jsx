@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import Todos from './components/Todos';
-import TodoForm from './components/TodoForm'; // Import TodoForm
+import TodoForm from './components/TodoForm';
 
-function App() {
+// Buat Context
+const TodoContext = createContext();
+
+// Buat Provider
+const App = () => {
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -44,12 +48,19 @@ function App() {
   };
 
   return (
-    <div className='mx-32 my-10 p-20 bg-purple-400 rounded-xl'>
-      <h1 className='mb-5 text-white font-bold text-xl border-b-2'>My Todo List</h1>
-      <TodoForm addTodo={addTodo} /> 
-      <Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
-    </div>
+    <TodoContext.Provider value={{ todos, toggleCompleted, deleteTodo, addTodo }}>
+      <div className='mx-32 mt-10 p-20 bg-purple-400 rounded-xl'>
+        <h1 className='mb-5 text-white font-bold text-xl border-b-2'>My Todo List</h1>
+        <TodoForm />
+        <Todos />
+      </div>
+    </TodoContext.Provider>
   );
 }
+
+// Untuk hooknya
+export const useTodos = () => {
+  return useContext(TodoContext);
+};
 
 export default App;

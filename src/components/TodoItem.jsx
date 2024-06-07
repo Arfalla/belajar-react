@@ -1,8 +1,15 @@
 import React from 'react';
+import { useTodos } from '../App';
 
-const TodoItem = ({ todo, toggleCompleted, deleteTodo }) => {
+const TodoItem = ({ todo }) => {
+  const { toggleCompleted, deleteTodo } = useTodos();
+
   const getTodoTitleStyle = () => {
-    return { textDecoration: todo.completed ? 'line-through' : 'none' };
+    if (todo.completed) {
+      return { textDecoration: 'line-through' };
+    } else {
+      return { textDecoration: 'none' };
+    }
   };
 
   return (
@@ -37,8 +44,8 @@ const styles = {
     cursor: 'pointer',
     fontSize: '16px',
     float: 'right',
-    marginTop: '-40px'
-  }
+    marginTop: '-40px',
+  },
 };
 
 export default TodoItem;
