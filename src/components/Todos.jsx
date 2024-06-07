@@ -1,21 +1,19 @@
-import React from 'react'
-import TodoItem from './TodoItem' 
+import React from 'react';
+import TodoItem from './TodoItem';
 
-const Todos = ({ todos, toggleCompleted }) => {
+const Todos = ({ todos, toggleCompleted, deleteTodo }) => {
   return (
     <div>
-     {todos.map((todo) => {
-        return (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            // Teruskan function toggleCompleted ke component TodoItem
-            toggleCompleted={toggleCompleted}
-          />
-        )
-      })}
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          toggleCompleted={toggleCompleted}
+          deleteTodo={deleteTodo}
+        />
+      ))}
     </div>
-  )
+  );
 }
 
-export default Todos
+export default Todos;

@@ -32,11 +32,14 @@ function App() {
     });
     setTodos(updatedTodos);
   };
-
+  const deleteTodo = (todoId) => {
+    const updatedTodos = todos.filter(todo => todo.id !== todoId);
+    setTodos(updatedTodos);
+  };
   return (
     <div className='mx-32 mt-10 p-20 bg-purple-400 rounded-xl'>
       <h1 className='mb-5 text-white font-bold text-xl border-b-2'>My Todo List</h1>
-      <Todos todos={todos} toggleCompleted={toggleCompleted} />
+      <Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo}/>
     </div>
   );
 }
