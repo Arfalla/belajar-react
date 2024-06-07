@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Todos from './components/Todos';
+import TodoForm from './components/TodoForm'; // Import TodoForm
 
 function App() {
   const [todos, setTodos] = useState([
@@ -32,14 +33,21 @@ function App() {
     });
     setTodos(updatedTodos);
   };
+
   const deleteTodo = (todoId) => {
     const updatedTodos = todos.filter(todo => todo.id !== todoId);
     setTodos(updatedTodos);
   };
+
+  const addTodo = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  };
+
   return (
-    <div className='mx-32 mt-10 p-20 bg-purple-400 rounded-xl'>
+    <div className='mx-32 my-10 p-20 bg-purple-400 rounded-xl'>
       <h1 className='mb-5 text-white font-bold text-xl border-b-2'>My Todo List</h1>
-      <Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo}/>
+      <TodoForm addTodo={addTodo} /> 
+      <Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
     </div>
   );
 }
